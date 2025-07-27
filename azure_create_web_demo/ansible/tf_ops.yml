@@ -17,6 +17,14 @@
 
 
   tasks:
+    - name: show project directory
+      debug:
+        msg: "{{ playbook_dir | dirname }}"
+
+    - name: Show rendered backend config from AWX credential
+      debug:
+        msg: "{{ backend_conf }}"
+        
     - name: Terraform apply | create_web_demo
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
