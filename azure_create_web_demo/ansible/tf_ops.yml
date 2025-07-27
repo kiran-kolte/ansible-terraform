@@ -19,7 +19,7 @@
   tasks:
     - name: Terraform init with backend config
       cloud.terraform.terraform:
-        project_path: "{{ terraform_directory }}"
+        project_path: "{{ tf_project_dir }}"
         command: init
         backend_config: "{{ backend_conf }}"
         force_init: true
