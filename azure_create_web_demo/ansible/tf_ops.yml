@@ -22,7 +22,7 @@
         project_path: "{{ tf_project_dir }}"
         command: init
         backend_config_files:
-          - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+          - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}.conf"
         force_init: true
         init: true
         workspace: default
