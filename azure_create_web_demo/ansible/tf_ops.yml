@@ -23,6 +23,15 @@
 
     - name: Show rendered backend config from AWX credential
       debug:
-        msg: "{{ backend_conf }} {{ ARM_TENANT_ID }}"
+        msg: "{{ backend_conf }}"
+
+    - name: Show Azure environment variables for Terraform
+      debug:
+        msg:
+          ARM_TENANT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
+          ARM_SUBSCRIPTION_ID: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
+          ARM_CLIENT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
+          ARM_CLIENT_SECRET: "[MASKED]"
+
         
     
