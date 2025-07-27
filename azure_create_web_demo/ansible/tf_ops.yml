@@ -17,21 +17,15 @@
 
 
   tasks:
-    - name: show project directory
-      debug:
-        msg: "{{ playbook_dir | dirname }}"
+    - name: Terraform init with backend config
+      cloud.terraform.terraform:
+        project_path: "{{ terraform_directory }}"
+        command: init
+        backend_config: "{{ backend_conf }}"
+        force_init: true
+        init: true
+        workspace: default
 
-    - name: Show rendered backend config from AWX credential
-      debug:
-        msg: "{{ backend_conf }}"
-
-    - name: Show Azure environment variables for Terraform
-      debug:
-        msg:
-          ARM_TENANT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_TENANT') }}"
-          ARM_SUBSCRIPTION_ID: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
-          ARM_CLIENT_ID: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
-          ARM_CLIENT_SECRET: "[MASKED]"
 
         
     
