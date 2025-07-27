@@ -21,7 +21,8 @@
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
         command: init
-        backend_config: "{{ backend_conf }}" 
+        backend_config_files:
+          - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
         force_init: true
         init: true
         workspace: default
