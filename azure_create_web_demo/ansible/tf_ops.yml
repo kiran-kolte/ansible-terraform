@@ -23,7 +23,6 @@
         project_path: "{{ tf_project_dir }}"
         force_init: true
         workspace: default
-        state: planned
 
     - name: Terraform Plan
       when: tf_action == "plan"
