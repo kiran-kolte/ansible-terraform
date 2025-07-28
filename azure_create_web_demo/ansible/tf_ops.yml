@@ -1,3 +1,4 @@
+
 ---
 - name: Terraform operations
   hosts: localhost
@@ -23,12 +24,20 @@
         project_path: "{{ tf_project_dir }}"
         force_init: true
         workspace: default
+        backend_config:
+          key: "{{ tf_project_key }}"
+        backend_config_files:
+          - "{{ backend_conf }}"
 
     - name: Terraform Plan
       when: tf_action == "plan"
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
         state: planned
+        backend_config:
+          key: "{{ tf_project_key }}"
+        backend_config_files:
+          - "{{ backend_conf }}"
       register: plan_result
 
     - name: Show Terraform Plan Output
