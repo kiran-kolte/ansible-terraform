@@ -1,9 +1,9 @@
 # Generic Az vars
-variable "az_resource_group" { default = "tf-web-demo-rg" }
+variable "az_resource_group" { default = "tf-ml-awx-demo-rg" }
 variable "az_region" { default = "southcentralus" }
 variable "web_tags_base" {
   default = {
-    owner = "zleblanc"
+    owner = "kkko134"
     demo = "web"
     deployment = "terraform"
     config = "ansible"
