@@ -15,5 +15,18 @@
     tf_project_key: az_web_demo  # used for state key
     backend_conf: "{{ TF_BACKEND_CONFIG_FILE }}"  # this is assumed to be injected by a credential
 
+  tasks:
+    - name: Read backend config file
+      slurp:
+        src: {{ backend_conf }}
+      register: backend_file_raw
+
+    - name: Print backend config content
+      debug:
+        msg: "{{ backend_file_raw.content | b64decode }}"
+
+    
+
+  
   roles:
     - role: terraform_run
