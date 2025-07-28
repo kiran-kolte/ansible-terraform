@@ -18,7 +18,7 @@
   tasks:
     - name: Read backend config file
       slurp:
-        src: {{ backend_conf }}
+        src: "{{ backend_conf }}"
       register: backend_file_raw
 
     - name: Print backend config content
