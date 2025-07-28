@@ -23,19 +23,19 @@
         terraform apply -auto-approve
       args: "{{ tf_project_dir }}"
       
-    chdir: "{{ tf_project_dir }}"
-    - name: Terraform apply | create_web_demo
-      cloud.terraform.terraform:
-        project_path: "{{ tf_project_dir }}"
-        state: present
-        force_init: true
-        backend_config:
-          key: "{{ tf_project_key }}"
-        backend_config_files:
-          - "{{ backend_conf }}"
-        variables:
-          web_demo_ssh_pubkey: "{{ az_ssh_pubkey }}"
-          web_vm_size: "{{ az_web_vm_size | default('Standard_DS1_v2') }}"
+    # chdir: "{{ tf_project_dir }}"
+    # - name: Terraform apply | create_web_demo
+    #   cloud.terraform.terraform:
+    #     project_path: "{{ tf_project_dir }}"
+    #     state: present
+    #     force_init: true
+    #     backend_config:
+    #       key: "{{ tf_project_key }}"
+    #     backend_config_files:
+    #       - "{{ backend_conf }}"
+    #     variables:
+    #       web_demo_ssh_pubkey: "{{ az_ssh_pubkey }}"
+    #       web_vm_size: "{{ az_web_vm_size | default('Standard_DS1_v2') }}"
 
     - name: Terraform destroy | create_web_demo
       tags: [never, remove]
