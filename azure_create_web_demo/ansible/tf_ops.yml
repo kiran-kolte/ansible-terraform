@@ -17,6 +17,13 @@
 
 
   tasks:
+    - name: Terraform apply with live output
+      ansible.builtin.shell: |
+        terraform init -backend-config="{{ backend_conf }}"
+        terraform apply -auto-approve
+      args: "{{ tf_project_dir }}"
+      
+    chdir: "{{ tf_project_dir }}"
     - name: Terraform apply | create_web_demo
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
