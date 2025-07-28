@@ -13,6 +13,12 @@
 - name: Terraform version
   command: >
     terraform --version
+  register: terraform_version
+
+- name: Print terraform version
+  debug:
+    var: terraform_version.stdout_lines
+  
 
 - name: Run terraform init
   command: >
