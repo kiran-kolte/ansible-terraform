@@ -13,16 +13,17 @@
   vars:
     tf_project_dir: "{{ playbook_dir | dirname }}"
     tf_project_key: az_web_demo # this is used to identify the remote state in blob storage
-    backend_conf: "{{ TF_BACKEND_CONFIG_FILE | from_yaml }}"
-
+    backend_conf: "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
 
   tasks:
     - name: Terraform init with backend config
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
         command: init
+        bbackend_config:
+          key: "{{ tf_project_key }}"
         backend_config_files:
-          - "{{ lookup('ansible.builtin.env', 'TF_BACKEND_CONFIG_FILE') }}"
+          - "{{ backend_conf }}"
         force_init: true
         init: true
         workspace: default
