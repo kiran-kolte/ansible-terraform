@@ -10,6 +10,10 @@
     content: "{{ backend_conf }}"
     dest: "{{ backend_file.path }}"
 
+- name: Terraform version
+  command: >
+    terraform --version
+
 - name: Run terraform init
   command: >
     terraform init
