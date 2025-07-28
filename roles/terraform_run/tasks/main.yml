@@ -1,29 +1,24 @@
-- name: Ensure terraform project directory exists
-  stat:
-    path: "{{ project_path }}"
-  register: tf_dir
+---
+- name: Create backend config file
+  tempfile:
+    state: file
+    suffix: .tfbackend
+  register: backend_file
 
-- name: Fail if terraform project directory does not exist
-  fail:
-    msg: "Terraform project path {{ project_path }} does not exist"
-  when: not tf_dir.stat.exists
-
-- name: Write backend config to temp file
+- name: Write backend config content
   copy:
-    content: "{{ backend_config }}"
-    dest: "/tmp/backend.conf"
-  when: backend_config is defined
+    content: "{{ backend_conf }}"
+    dest: "{{ backend_file.path }}"
 
 - name: Run terraform init
   command: >
     terraform init
-    {% if backend_config is defined %} -backend-config=/tmp/backend.conf {% endif %}
+    -backend-config="{{ backend_file.path }}"
     -input=false
   args:
-    chdir: "{{ project_path }}"
-  register: tf_init
-  environment: "{{ tf_env | default({}) }}"
+    chdir: "{{ tf_project_dir }}"
+  register: terraform_init
 
 - name: Print terraform init output
   debug:
-    var: tf_init.stdout_lines
+    var: terraform_init.stdout_lines
