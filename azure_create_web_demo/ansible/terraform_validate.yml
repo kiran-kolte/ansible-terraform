@@ -1,0 +1,15 @@
+- name: Terraform Validate
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Terraform Init
+      ansible.builtin.command:
+        cmd: terraform init
+      args:
+        chdir: "{{ tf_working_dir }}"
+
+    - name: Terraform Validate
+      ansible.builtin.command:
+        cmd: terraform validate
+      args:
+        chdir: "{{ tf_working_dir }}"
