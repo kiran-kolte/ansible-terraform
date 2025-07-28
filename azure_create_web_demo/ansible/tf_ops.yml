@@ -12,14 +12,8 @@
 
   vars:
     tf_project_dir: "{{ playbook_dir | dirname }}"
-    tf_project_key: az_web_demo # this is used to identify the remote state in blob storage
-    backend_conf: "{{ TF_BACKEND_CONFIG_FILE }}"
+    tf_project_key: az_web_demo  # used for state key
+    backend_conf: "{{ TF_BACKEND_CONFIG_FILE }}"  # this is assumed to be injected by a credential
 
-  tasks:
-    - name: Terraform init with backend config
-      roles:
-      - role: terraform_run
-
-
-        
-    
+  roles:
+    - role: terraform_run
