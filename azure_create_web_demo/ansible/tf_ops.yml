@@ -32,7 +32,6 @@
           web_vm_size: "{{ az_web_vm_size | default('Standard_DS1_v2') }}"
 
     - name: Terraform destroy | create_web_demo
-      when: tf_action == "destroy"
       tags: [never, remove]
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
