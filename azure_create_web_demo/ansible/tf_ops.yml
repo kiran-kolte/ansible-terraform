@@ -18,35 +18,7 @@
 
 
   tasks:
-
-    - name: Terraform Init
-      cloud.terraform.terraform:
-        project_path: "{{ tf_project_dir }}"
-        force_init: true
-        workspace: default
-        backend_config:
-          key: "{{ tf_project_key }}"
-        backend_config_files:
-          - "{{ backend_conf }}"
-
-    - name: Terraform Plan
-      when: tf_action == "plan"
-      cloud.terraform.terraform:
-        project_path: "{{ tf_project_dir }}"
-        state: planned
-        backend_config:
-          key: "{{ tf_project_key }}"
-        backend_config_files:
-          - "{{ backend_conf }}"
-      register: plan_result
-
-    - name: Show Terraform Plan Output
-      when: tf_action == "plan"
-      debug:
-        var: plan_result.stdout
-        
     - name: Terraform apply | create_web_demo
-      when: tf_action == "apply"
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
         state: present
