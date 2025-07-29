@@ -20,6 +20,7 @@
 
   tasks:
     - name: Terraform apply | create_web_demo
+      tags: [apply]
       cloud.terraform.terraform:
         project_path: "{{ tf_project_dir }}"
         state: present
@@ -34,6 +35,7 @@
       register: tf_apply_result
 
     - name: Show Terraform stdout
+      tags: [apply]
       debug:
         msg: "{{ tf_apply_result.stdout }}"
 
