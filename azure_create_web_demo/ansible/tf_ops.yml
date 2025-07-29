@@ -53,6 +53,7 @@
       register: tf_destroy_result
 
     - name: Show Terraform stdout
+      tags: [never, remove]
       debug:
         msg: "{{ tf_destroy_result.stdout }}"
       
